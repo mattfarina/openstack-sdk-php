@@ -21,7 +21,6 @@
  */
 namespace OpenStack\Tests;
 
-require_once 'src/OpenStack/Bootstrap.php';
 require_once 'test/TestCase.php';
 
 class BootstrapTest extends \OpenStack\Tests\TestCase {
