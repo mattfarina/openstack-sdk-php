@@ -41,8 +41,8 @@ class AutoloaderTest extends \OpenStack\Tests\TestCase
         \OpenStack\Autoloader::useAutoloader();
 
         // If we can construct a class, we are okay.
-        $test = new \OpenStack\Exception("TEST");
+        $test = new \OpenStack\Common\Exception("TEST");
 
-        $this->assertInstanceOf('\OpenStack\Exception', $test);
+        $this->assertInstanceOf('\OpenStack\Common\Exception', $test);
     }
 }

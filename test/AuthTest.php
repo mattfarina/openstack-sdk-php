@@ -23,11 +23,11 @@
 $base = dirname(__DIR__);
 require_once $base . '/src/OpenStack/Autoloader.php';
 
-use \OpenStack\Storage\ObjectStorage;
-use \OpenStack\Services\IdentityService;
+use \OpenStack\ObjectStore\v1\ObjectStorage;
+use \OpenStack\Identity\v2\IdentityService;
 
 $config = array(
-    'transport' => '\OpenStack\Transport\PHPStreamTransport',
+    'transport' => '\OpenStack\Common\Transport\GuzzleClient',
     'transport.timeout' => 240,
     //'transport.debug' => 1,
     'transport.ssl.verify' => 0,

@@ -92,7 +92,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $key = self::$settings['openstack.swift.key'];
         $url = self::$settings['openstack.swift.url'];
         //$url = self::$settings['openstack.identity.url'];
-        return \OpenStack\Storage\ObjectStorage::newFromSwiftAuth($user, $key, $url, $this->getTransportClient());
+        return \OpenStack\ObjectStore\v1\ObjectStorage::newFromSwiftAuth($user, $key, $url, $this->getTransportClient());
 
     }
 
@@ -115,7 +115,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $tenantId = self::conf('openstack.identity.tenantId');
             $url = self::conf('openstack.identity.url');
 
-            $is = new \OpenStack\Services\IdentityService($url);
+            $is = new \OpenStack\Identity\v2\IdentityService($url);
 
             $token = $is->authenticateAsUser($user, $pass, $tenantId);
 
@@ -131,7 +131,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         if ($reset || empty(self::$ostore)) {
             $ident = $this->identity($reset);
 
-            $objStore = \OpenStack\Storage\ObjectStorage::newFromIdentity($ident,  self::$settings['openstack.swift.region'], $this->getTransportClient());
+            $objStore = \OpenStack\ObjectStore\v1\ObjectStorage::newFromIdentity($ident,  self::$settings['openstack.swift.region'], $this->getTransportClient());
 
             self::$ostore = $objStore;
 
@@ -183,7 +183,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $container = $store->container($cname);
         }
         // The container was never created.
-        catch (\OpenStack\Transport\FileNotFoundException $e) {
+        catch (\OpenStack\Common\Transport\FileNotFoundException $e) {
             return;
         }
 
@@ -239,7 +239,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
             $container = $store->container($cname);
         }
         // The container was never created.
-        catch (\OpenStack\Transport\FileNotFoundException $e) {
+        catch (\OpenStack\Common\Transport\FileNotFoundException $e) {
             return;
         }
 
